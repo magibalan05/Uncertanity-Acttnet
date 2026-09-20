@@ -21,7 +21,7 @@ def run_interactive_prediction():
         print(f"[*] GPU Model: {torch.cuda.get_device_name(0)}")
 
     # 1. Load Master Model Weights
-    checkpoint_path = "checkpoints/hqu_msanet_brats2023_ultimate_best.pth"
+    checkpoint_path = "checkpoints/hqu_msanet_brats2023_joint_best.pth"
     if not os.path.exists(checkpoint_path):
         checkpoint_path = "checkpoints/hqu_msanet_brats2023_best.pth"
         
