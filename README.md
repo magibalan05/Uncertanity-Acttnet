@@ -1,12 +1,12 @@
 # A Hybrid Quantum Uncertainty-Coupled Multi-Scale Attention Network (HQU-MSANet)
-## For Trustworthy Brain Tumor Segmentation on BraTS 2023 MRI
+## For Trustworthy Brain Tumor Segmentation on BraTS 2023 MRI (Glioma & Meningioma)
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1%2B-EE4C2C.svg)](https://pytorch.org/)
 [![CUDA](https://img.shields.io/badge/CUDA-12.1-76B900.svg)](https://developer.nvidia.com/cuda-toolkit)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ### 📌 Overview
-**HQU-MSANet** is an advanced hybrid deep learning framework for robust 3D/2D Brain Tumor Segmentation on multi-modal MRI scans (`T1c`, `T1n`, `T2w`, `T2f FLAIR`). The network integrates multi-scale feature extraction, parameterized quantum circuits (PQC), stochastic Monte Carlo epistemic uncertainty modeling, and entropy-gated spatial attention (EGSA).
+**HQU-MSANet** is an advanced hybrid deep learning framework for robust 3D/2D Brain Tumor Segmentation on multi-modal MRI scans (`t1c`, `t1n`, `t2w`, `t2f` FLAIR). The network integrates multi-scale feature extraction, parameterized quantum circuits (PQC), stochastic Monte Carlo epistemic uncertainty modeling, and entropy-gated spatial attention (EGSA). It supports joint dataset training across **BraTS 2023 Glioma (GLI)** and **Meningioma (MEN)** challenges.
 
 ---
 
@@ -50,14 +50,17 @@ BraTS 2023 Multi-Modal MRI Input (T1c, T1n, T2w, T2f)
 
 ```
 ├── model.py                # Multi-Scale Conv Encoder, Quantum Enhancement & HQU-MSANet Architecture
-├── dataset.py              # Multi-modal NIfTI MRI Dataset Loader
+├── dataset.py              # Multi-modal NIfTI MRI Dataset Loader (GLI & MEN)
 ├── fast_dataset.py         # In-memory / Cached PyTorch Dataset Loader
 ├── metrics.py              # Combined Boundary Loss, Dice Score, IoU & ECE Calibration Metrics
 ├── train_ultimate.py       # Master GPU Training & Mixed Precision Fine-Tuning Pipeline
+├── train_joint.py          # Joint Glioma (GLI) + Meningioma (MEN) Training Pipeline
+├── preprocess_joint.py     # Joint offline dataset pre-caching pipeline (GLI + MEN)
+├── preprocess_all_1000.py  # High-speed offline dataset pre-caching pipeline
 ├── upload_and_predict.py   # Interactive GUI File Picker & Prediction Diagnostic Tool
 ├── predict_patient.py      # Single NIfTI Patient Scan Inference Tool
 ├── run_verification.py     # Batch Verification & Heatmap Exporter
-├── preprocess_all_1000.py  # High-speed offline dataset pre-caching pipeline
+├── results/                # Visualized segmentation & uncertainty sample outputs
 ├── .gitignore              # Git ignore rules for dataset & heavy binary exclusions
 └── README.md               # Project documentation
 ```
@@ -68,24 +71,25 @@ BraTS 2023 Multi-Modal MRI Input (T1c, T1n, T2w, T2f)
 
 #### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/your-username/HQU-MSANet.git
-cd HQU-MSANet
+git clone https://github.com/magibalan05/Uncertanity-Acttnet.git
+cd Uncertanity-Acttnet
 pip install -r requirements.txt
 ```
 
-#### 2. Run Interactive Prediction Tool
+#### 2. Run Interactive GUI Prediction Tool
 To launch the interactive GUI file picker and view predictions with **Epistemic Uncertainty Heatmaps**:
 ```bash
-py -3.11 upload_and_predict.py
+python upload_and_predict.py
 ```
 
-#### 3. Train Model on GPU
+#### 3. Joint Preprocessing & Training on GPU (GLI + MEN)
 ```bash
-py -3.11 preprocess_all_1000.py
-py -3.11 train_ultimate.py
+python preprocess_joint.py
+python train_joint.py
 ```
 
 ---
 
 ### 📜 License
 Distributed under the MIT License.
+
